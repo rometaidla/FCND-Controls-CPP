@@ -34,7 +34,7 @@ PASS: ABS(Quad2.Yaw) was less than 0.100000 for at least 1.000000 seconds
 
 ### Scenario 4 - Non-idealities and robustness
 
-As red drone didn't end up in target testination, I added integral control to altitude controller and increased `KiPosZ` parameter to `40`.
+As red quad didn't end up in target testination, I added integral control to altitude controller and increased `KiPosZ` parameter to `40`.
 
 Green seems to use a trajectory that goes to the left a little bit and red seems to take time to settle because of mass.
 
@@ -49,7 +49,7 @@ PASS: ABS(Quad3.PosFollowErr) was less than 0.100000 for at least 1.500000 secon
 
 ### Scenario 5  - Trajectory follow
 
-Drone following trajectory `FigureEight` seems to be doing it quite well. Drone following trajectory `FigureEightFF.txt` is struggling and flying a little bit off.
+Quad following trajectory `FigureEight` seems to be doing it quite well. Quad following trajectory `FigureEightFF.txt` is struggling and flying a little bit off.
 
 ![](./img/scenario5.png)
 
