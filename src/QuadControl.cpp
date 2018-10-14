@@ -70,10 +70,16 @@ VehicleCommand QuadControl::GenerateMotorCommands(float collThrustCmd, V3F momen
 
   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
 
-  cmd.desiredThrustsN[0] = mass * 9.81f / 4.f; // front left
-  cmd.desiredThrustsN[1] = mass * 9.81f / 4.f; // front right
-  cmd.desiredThrustsN[2] = mass * 9.81f / 4.f; // rear left
-  cmd.desiredThrustsN[3] = mass * 9.81f / 4.f; // rear right
+    float l = L / sqrtf(2.f);
+    float t1 = momentCmd.x / l;
+    float t2 = momentCmd.y / l;
+    float t3 = - momentCmd.z / kappa;
+    float t4 = collThrustCmd;
+
+    cmd.desiredThrustsN[0] = (t1 + t2 + t3 + t4)/4.f;  // front left
+    cmd.desiredThrustsN[1] = (-t1 + t2 - t3 + t4)/4.f; // front right
+    cmd.desiredThrustsN[2] = (t1 - t2 - t3 + t4)/4.f ; // rear left
+    cmd.desiredThrustsN[3] = (-t1 - t2 + t3 + t4)/4.f; // rear right
 
   /////////////////////////////// END STUDENT CODE ////////////////////////////
 
@@ -98,7 +104,8 @@ V3F QuadControl::BodyRateControl(V3F pqrCmd, V3F pqr)
 
   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
 
-  
+  V3F I(Ixx, Iyy, Izz);
+  momentCmd = I * kpPQR * ( pqrCmd - pqr );
 
   /////////////////////////////// END STUDENT CODE ////////////////////////////
 
@@ -130,6 +137,21 @@ V3F QuadControl::RollPitchControl(V3F accelCmd, Quaternion<float> attitude, floa
   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
 
 
+    float c = - collThrustCmd / mass;
+    
+    float b_x = R(0,2);
+    float b_x_c = accelCmd.x / c;
+    float b_x_error = b_x_c - b_x;
+    float b_x_p_term = kpBank * b_x_error;
+    
+    float b_y = R(1,2);
+    float b_y_c = accelCmd.y / c;
+    float b_y_error = b_y_c - b_y;
+    float b_y_p_term = kpBank * b_y_error;
+    
+    pqrCmd.x = (R(1,0) * b_x_p_term - R(0,0) * b_y_p_term) / R(2,2);
+    pqrCmd.y = (R(1,1) * b_x_p_term - R(0,1) * b_y_p_term) / R(2,2);
+    pqrCmd.z = 0;
 
   /////////////////////////////// END STUDENT CODE ////////////////////////////
 
