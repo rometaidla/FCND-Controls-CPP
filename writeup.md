@@ -5,6 +5,7 @@
 ### Scenario 2 - Body rate and roll/pitch control
 
 `kpPQR` parameter was set to `92, 95, 5`
+
 `kpBank` parameter was set to `10`
 
 ![](./img/scenario2.png)
