@@ -1,5 +1,39 @@
 # Writeup
 
+## Scenarios
+
+### Scenario 2 - Body rate and roll/pitch control
+
+![](./img/scenario2.png)
+
+```
+Simulation #83 (../config/2_AttitudeControl.txt)
+PASS: ABS(Quad.Roll) was less than 0.025000 for at least 0.750000 seconds
+PASS: ABS(Quad.Omega.X) was less than 2.500000 for at least 0.750000 seconds
+```
+
+### Scenario 3 - Position/velocity and yaw angle control
+
+![](./img/scenario3.png)
+
+```
+Simulation #88 (../config/3_PositionControl.txt)
+PASS: ABS(Quad1.Pos.X) was less than 0.100000 for at least 1.250000 seconds
+PASS: ABS(Quad2.Pos.X) was less than 0.100000 for at least 1.250000 seconds
+PASS: ABS(Quad2.Yaw) was less than 0.100000 for at least 1.000000 seconds
+```
+
+### Scenario 4 - Non-idealities and robustness
+
+![](./img/scenario4.png)
+
+```
+Simulation #91 (../config/4_Nonidealities.txt)
+PASS: ABS(Quad1.PosFollowErr) was less than 0.100000 for at least 1.500000 seconds
+PASS: ABS(Quad2.PosFollowErr) was less than 0.100000 for at least 1.500000 seconds
+PASS: ABS(Quad3.PosFollowErr) was less than 0.100000 for at least 1.500000 seconds
+```
+
 ## Rubrics criterias
 
 ### Implemented body rate control in C++.
