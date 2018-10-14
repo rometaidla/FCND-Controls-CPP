@@ -4,6 +4,12 @@
 
 ### Scenario 2 - Body rate and roll/pitch control
 
+Motor commands calculation was implemented in [/cpp/src/QuadControl::GenerateMotorCommands method ](/src/QuadControl.cpp#L56-L87)
+
+Body rate control was implemented in [/cpp/src/QuadControl::BodyRateControl method ](/src/QuadControl.cpp#L89-L103) as P controller.
+
+Roll/pitch control was implemented in [/cpp/src/QuadControl::RollPitchControl method ](/src/QuadControl.cpp#L116-L159) as P controller.
+
 `kpPQR` parameter was set to `92, 95, 5`
 
 `kpBank` parameter was set to `10`
@@ -17,6 +23,12 @@ PASS: ABS(Quad.Omega.X) was less than 2.500000 for at least 0.750000 seconds
 ```
 
 ### Scenario 3 - Position/velocity and yaw angle control
+
+Altitude control was implemented in [/cpp/src/QuadControl::AltitudeControl method ](/src/QuadControl.cpp#L161-L201) as PID controller.
+
+Lateral control was implemented in [/cpp/src/QuadControl::LateralPositionControl method ](/src/QuadControl.cpp#L204-L249) as PD controller.
+
+Yaw control was implemented in [/cpp/src/QuadControl::YawControl method ](/src/QuadControl.cpp#L252-L272) as P controller.
 
 All parameters `kpPosXY`, `kpPosZ`, `KiPosZ` was set to `30`
 
@@ -64,29 +76,3 @@ PASS: ABS(Quad2.PosFollowErr) was less than 0.250000 for at least 3.000000 secon
 In this scenario quads seems to fly to very different directions at first, but once they settle they seems to follow path quite well.
 
 ![](./img/scenario6.png)
-
-## Rubrics criterias
-
-### Implemented body rate control in C++.
-
-Body rate control is implemented in [/cpp/src/QuadControl::BodyRateControl method ](/src/QuadControl.cpp#L89-L103) as P controller.
-
-### Implemented roll pitch control in C++.
-
-Roll/pitch control is implemented in [/cpp/src/QuadControl::RollPitchControl method ](/src/QuadControl.cpp#L116-L159) as P controller.
-
-### Implemented altitude controller in C++.
-
-Altitude control is implemented in [/cpp/src/QuadControl::AltitudeControl method ](/src/QuadControl.cpp#L161-L201) as PID controller.
-
-### Implemented lateral position control in C++.
-
-Lateral control is implemented in [/cpp/src/QuadControl::LateralPositionControl method ](/src/QuadControl.cpp#L204-L249) as PD controller.
-
-### Implemented yaw control in C++.
-
-Yaw control is implemented in [/cpp/src/QuadControl::YawControl method ](/src/QuadControl.cpp#L252-L272) as P controller.
-
-### Implement calculating the motor commands given commanded thrust and moments in C++.
-
-Motor command are calculated in [/cpp/src/QuadControl::GenerateMotorCommands method ](/src/QuadControl.cpp#L56-L87)
