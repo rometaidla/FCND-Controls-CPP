@@ -2,4 +2,4 @@
 
 ### 1. Implemented body rate control in C++
 
-![](./img/scenario1.jpg)
+![](./img/scenario1.png)
